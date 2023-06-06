@@ -28,8 +28,10 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'm-and-n.duckdns.org'
-]
+    'm-and-n.duckdns.org',
+    'localhost',
+    '184.89.38.54'
+]   
 
 # Cross Origin Resource Sharing (CORS)
 CORS_ORIGIN_WHITELIST = [
