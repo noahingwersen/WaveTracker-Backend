@@ -1,4 +1,9 @@
-.env/
+.env
 docker-compose.yaml
 Dockerfile
 requirements.txt
+conf.d/
+.dev_env/
+entrypoint.sh
+.dockerignore
+.gitignore
