@@ -14,6 +14,11 @@ from pathlib import Path
 from datetime import timedelta
 import os
 
+# Top level hosting settings
+HOST = 'm-and-n.duckdns.org'
+SUBFOLDER = 'wavetracker-api'
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,10 +30,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'Testing')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.getenv('DJANGO_DEBUG', True))
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+
+FORCE_SCRIPT_NAME = f'/{SUBFOLDER}/'
 
 ALLOWED_HOSTS = [
-    'm-and-n.duckdns.org',
+    HOST,
     'localhost',
     '127.0.0.1',
     '184.89.38.54'
@@ -40,10 +47,17 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    f'https://{HOST}'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
+# Cross Site Request Forgery (CSRF)
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{HOST}',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
+]
 
 # Application definition
 
@@ -177,7 +191,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = f'/{SUBFOLDER}/static/'
 
 STATIC_ROOT = '/static/'
 
