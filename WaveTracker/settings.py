@@ -38,8 +38,7 @@ FORCE_SCRIPT_NAME = f'/{SUBFOLDER}/'
 ALLOWED_HOSTS = [
     HOST,
     'localhost',
-    '127.0.0.1',
-    '184.89.38.54'
+    '127.0.0.1'
 ]   
 
 # Cross Origin Resource Sharing (CORS)
