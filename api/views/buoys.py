@@ -10,7 +10,7 @@ import pytz
 
 
 class BuoyListView(APIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, *args, **kwargs):
         buoys = Buoy.objects.all()

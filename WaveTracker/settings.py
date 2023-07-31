@@ -16,8 +16,8 @@ import os
 
 # Top level hosting settings
 HOST = 'm-and-n.duckdns.org'
-#SUBFOLDER = 'wavetracker-api'
-STATIC_URL = '/static/'
+SUBFOLDER = 'wavetracker-api'
+STATIC_URL = '/wavetracker-static/'
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'Testing')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-#FORCE_SCRIPT_NAME = f'/{SUBFOLDER}/'
+FORCE_SCRIPT_NAME = f'/{SUBFOLDER}/'
 
 ALLOWED_HOSTS = [
     HOST,
@@ -47,8 +47,6 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
     f'https://{HOST}'
 ]
 
