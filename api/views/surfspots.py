@@ -35,8 +35,10 @@ class SurfSpotListView(APIView):
                 serializer.save()
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        return Response(status=status.HTTP_202_ACCEPTED)
+            
+        surf_spots = request.user.surf_spots.all()
+        surf_spot_serializer = SurfSpotSerializer(surf_spots, many=True)
+        return Response(surf_spot_serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def delete(self, request, *args, **kwargs):
         surf_spot = get_object_or_404(SurfSpot, id=request.data['id'])
