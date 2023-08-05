@@ -39,6 +39,9 @@ class WaveTrackerTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims
         token['username'] = user.username
+        token["first_name"] = user.first_name
+        token["last_name"] = user.last_name
+        token["email"] = user.email
 
         return token
 
@@ -80,22 +83,9 @@ class ProfileView(APIView):
     def get(self, request, username, *args, **kwargs):
         user = request.user
         requested_user = get_object_or_404(get_user_model(), username=username)
-        profile_data = {'first_name': requested_user.first_name,
-                        'last_name': requested_user.last_name,
-                        'username': requested_user.username,
-                        'total_surf_spots': len(requested_user.surf_spots.all()),
+        profile_data = {'total_surf_spots': len(requested_user.surf_spots.all()),
                         'total_surf_sessions': len(requested_user.surf_sessions.all())}
 
-        if user == requested_user:
-            profile_data.update({
-                'email': user.email,
-            })
-
-        else:
-            profile_data.update({
-                'total_surf_spots': len(requested_user.surf_spots.all()),
-                'total_surf_sessions': len(requested_user.surf_sessions.all())
-            })
 
         return Response(profile_data, status=status.HTTP_200_OK)
 
